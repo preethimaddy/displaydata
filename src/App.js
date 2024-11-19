@@ -1,23 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import FormPage from './FormPage'; // Your form component
+import DisplayPage from './DisplayPage'; // The page to display form data
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Router>
+      <Routes>
+        <Route path="/" element={<FormPage />} />
+        <Route path="/display" element={<DisplayPage />} />
+      </Routes>
+    </Router>
     </div>
   );
 }
