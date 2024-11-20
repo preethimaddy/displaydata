@@ -1,13 +1,23 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 const DisplayPage = () => {
-    const location = useLocation();
-    const { userInfo, prompts } = location.state || {};
-  
-    if (!userInfo || !prompts) {
-      return <p>No data to display</p>;
-    }
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { userInfo, prompts } = location.state || {};
+
+  if (!userInfo || !prompts) {
+    return <p>No data to display</p>;
+  }
+
+  const handleEdit = () => {
+    // Navigate back to FormPage with current state
+    navigate('/', { state: { userInfo, prompts, isEditing: true } });
+  };
+ const handleNext = () => {
+  navigate("/next"); // Navigate to the next page
+ }
+
   return (
     <div>
       <h1>User Information</h1>
@@ -23,8 +33,11 @@ const DisplayPage = () => {
           <p><strong>Answer:</strong> {prompt.answer}</p>
         </div>
       ))}
+      
+      <button onClick={handleEdit} className="btn btn-warning">Edit</button>
+      <button onClick={handleNext}>Next</button>
     </div>
-  )
-}
+  );
+};
 
-export default DisplayPage
+export default DisplayPage;
